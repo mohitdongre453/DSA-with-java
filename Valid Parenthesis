@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> sk=new Stack<Character>();
+        for(int i=0; i<s.length(); i++){
+            char ch=s.charAt(i);
+            if(isOpen(ch)){
+                sk.push(ch);
+                
+            }
+            else if(isClose(ch)){
+                if(sk.isEmpty())
+                    return false;
+                
+                char pk=sk.peek();
+                
+                if(!isMatching(ch,pk))
+                    return false;
+                else
+                    sk.pop();
+            }
+        }
+        return sk.isEmpty();
+        
+    }
+    public static boolean isOpen(char ch){
+        return ch=='(' || ch=='{' || ch=='[';
+    }
+    public static boolean isClose(char ch){
+        return ch==')' || ch=='}' || ch==']';
+    }
+    public static boolean isMatching(char ch,char pk){
+        return (pk=='(' && ch==')') || (pk=='{' && ch=='}') || (pk=='[' && ch==']');
+    }
+}
