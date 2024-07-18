@@ -1,0 +1,36 @@
+class Solution {
+    public static int getpivot(int[] a){
+        int s=0; 
+        int e=a.length-1; 
+        int mid=s+(e-s)/2;
+        while(s<e){
+            if(a[mid]>=a[0])
+                s=mid+1;
+            else
+                e=mid;
+        mid=s+(e-s)/2;    
+        }
+        return s;
+    }
+    public static int binarySearch(int[] arr,int s,int e,int key){
+        int mid=s+(e-s)/2;
+        while(s<=e){
+            if(arr[mid]==key)
+                return mid;
+            else if(arr[mid]<key)
+                s=mid+1;
+            else
+                e=mid-1;
+            mid=s+(e-s)/2;
+        }
+        return -1;
+    }
+    public int search(int[] nums, int target) {
+        int pivot=getpivot(nums);
+        if(target>=nums[pivot] && target<=nums[nums.length-1])
+            return binarySearch(nums,getpivot(nums),nums.length-1,target);
+        else
+            return binarySearch(nums,0,getpivot(nums)-1,target);
+        
+}
+}
