@@ -1,0 +1,33 @@
+class Solution {
+    // Function to find common elements in three arrays.
+    public List<Integer> commonElements(List<Integer> arr1, List<Integer> arr2,
+                                        List<Integer> arr3) {
+        List<Integer> l=new ArrayList<Integer>();
+        int i=0;
+        int j=0;
+        int k=0;
+        while(i<arr1.size() && j<arr2.size() && k<arr3.size()){
+            int val1=arr1.get(i);
+            int val2=arr2.get(j);
+            int val3=arr3.get(k);
+            if(val1==val2 && val2==val3){
+                if(l.size()==0 || l.get(l.size()-1)!=val1)
+                    l.add(val1);
+                i++;
+                j++;
+                k++;
+            }
+            else if(val1<val2)
+               i++;
+            else if(val2<val3)
+                j++;
+            else 
+                k++;
+        }
+        if(l.size()==0){
+            l.add(-1);
+            return l;
+        }
+        return l;
+    }
+}
