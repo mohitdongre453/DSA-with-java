@@ -1,0 +1,40 @@
+class Solution {
+    
+    public void Rearrange(int a[], int n)
+    {
+        int pc=0;
+        int nc=0;
+        for(int i=0; i<a.length; i++){
+            if(a[i]<0)
+               nc++;
+            else 
+               pc++;
+        }
+        int[] arr1=new int[pc];
+        int[] arr2=new int[nc];
+        int index1=0;
+        int index2=0;
+        for(int i=0; i<a.length; i++){
+            if(a[i]<0){
+               arr2[index2]=a[i];
+               index2++;
+            }
+            else{
+                arr1[index1]=a[i];
+                index1++;
+            }
+        }
+        int j=0;
+        int k=0;
+        while(j<nc){
+            a[j]=arr2[j];
+            j++;
+        }
+        while(k<pc){
+            a[j]=arr1[k];
+            k++;
+            j++;
+        }
+    }
+}
+https://www.geeksforgeeks.org/problems/arranging-the-array1131/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
