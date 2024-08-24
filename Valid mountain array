@@ -1,0 +1,27 @@
+class Solution {
+    public boolean validMountainArray(int[] arr) {
+       boolean incr=true;
+        for(int i=1; i<arr.length; i++){
+            if(arr[i]<arr[i-1]){
+                if(i==1){
+                    return false;
+                }
+                incr=false;
+            }
+            if(incr){
+                if(arr[i]<=arr[i-1]){
+                    return false;
+                }
+            }
+            else{
+                if(arr[i]>=arr[i-1]){
+                    return false;
+                }
+            }
+            
+        }
+        if(incr)
+            return false;
+        return true;
+    }
+}
