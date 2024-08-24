@@ -1,0 +1,23 @@
+class GfG
+{
+    int maxLen(int arr[], int n)
+    {
+      HashMap<Integer,Integer> m=new HashMap<Integer,Integer>();
+      int sum=0;
+      int maxlen=0;
+      for(int i=0; i<n; i++){
+          sum=sum+arr[i];
+          if(sum==0){
+              maxlen=i+1;
+          }
+          if(m.containsKey(sum-0)){
+              int len=i-m.get(sum-0);
+              maxlen=Math.max(len,maxlen);
+          }
+          else if(!m.containsKey(sum-0)){
+              m.put(sum,i);
+          }
+      }
+      return maxlen;     
+    }
+}
