@@ -1,0 +1,22 @@
+class Solve {
+    int[] findTwoElement(int arr[], int n) {
+        int[] ans=new int[2];
+        long sum=0;
+        long sum2=0;
+        long sumn=(n*(n+1))/2;
+        long sum2n=(n*(n+1)*(2*n+1))/6;
+        for(int i=0; i<n; i++){
+            sum=sum+(long)arr[i];
+            sum2=sum2n+(long)arr[i]*(long)arr[i];
+        }
+        long val1=sum-sumn;
+        long val2=sum2-sum2n;
+        val2=val2/val1;
+        long x=(val1+val2)/2;
+        long y=x-val1;
+        ans[0]=(int)x;
+        ans[1]=(int)y;
+        return ans;
+        
+    }
+}
