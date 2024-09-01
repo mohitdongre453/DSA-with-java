@@ -1,0 +1,23 @@
+class Solution {
+    public static void solve(int[] nums,List<Integer> output,int index,List<List<Integer>> ans){
+        if(index>=nums.length){
+            ans.add(new ArrayList<>(output));
+            return;
+        }
+        solve(nums,output,index+1,ans);
+        int element=nums[index];
+        output.add(element);
+        solve(nums,output,index+1,ans);
+        output.remove(output.size()-1);
+        
+        
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<Integer> output=new ArrayList<Integer>();
+        List<List<Integer>> ans=new ArrayList<>();
+        int index=0;
+        solve(nums,output,index,ans);
+        return ans;
+        
+    }
+}
