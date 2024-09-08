@@ -1,0 +1,40 @@
+class Solution {
+    public static Node getMid(Node head){
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public static Node reverse(Node head){
+        Node prev=null;
+        Node forward=null;
+        Node curr=head;
+        while(curr!=null){
+            forward=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=forward;
+        }
+        return prev;
+    }
+    boolean isPalindrome(Node head) {
+        Node temp=getMid(head);
+        Node rev=reverse(temp.next);
+        temp.next=rev;
+        Node head1=head;
+        Node head2=temp.next;
+        while(head2!=null){
+            if(head1.data!=head2.data)
+                return false;
+            head1=head1.next;
+            head2=head2.next;
+        }
+       // reverse(temp.next);
+        return true;
+        
+        
+    }
+}
