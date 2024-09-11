@@ -1,0 +1,22 @@
+class GfG {
+    public static void InsertSorted(Stack<Integer> s,int num){
+        if(s.isEmpty() || s.peek()<num){
+            s.push(num);
+            return;
+        }
+        int x=s.pop();
+        InsertSorted(s,num);
+        s.push(x);
+    }
+    public static void solve(Stack<Integer> s){
+        if(s.isEmpty())
+           return;
+        int num=s.pop();
+        solve(s);
+        InsertSorted(s,num);
+    }
+    public Stack<Integer> sort(Stack<Integer> s) {
+        solve(s);
+        return s;
+    }
+}
