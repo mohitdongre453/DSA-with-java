@@ -1,0 +1,35 @@
+class Tree {
+    public static int Min(Node root){
+        Node temp=root;
+        while(temp.left!=null){
+            temp=temp.left;
+        }
+        return temp.data;
+    }
+    public static Node solve(Node root,int x){
+              if(root==null)
+               return root;
+           if(root.data==x){
+               if(root.left==null && root.right==null) 
+                   return null;
+                if(root.left!=null && root.right==null)
+                    return root.left;
+                if(root.left==null && root.right!=null)
+                     return root.right;
+                int min=Min(root.right);
+                root.data=min;
+                root.right=solve(root.right,min);     
+           }
+           else if(x<root.data)
+               root.left=solve(root.left,x);
+           else 
+             root.right= solve(root.right,x);  
+              return root;  
+            
+    }
+    public static Node deleteNode(Node root, int X) {
+      return solve(root,X);
+      
+        
+    }
+}
