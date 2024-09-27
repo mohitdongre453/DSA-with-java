@@ -1,0 +1,26 @@
+class GfG {
+    public static void nodeToIndex(int[] inorder,HashMap<Integer,Integer> m,int n){
+        for(int i=0; i<n; i++){
+            m.put(inorder[i],i);
+        }
+    }
+     public static Node solve(int[] postorderIndex,int[] inorder,int[] postorder,int start,int end,int n,HashMap<Integer,Integer> m){
+        if(postorderIndex[0]<0 || start>end)
+            return null;
+        int element=postorder[postorderIndex[0]--];
+        Node root=new Node(element);
+        int position=m.get(element);
+        root.right=solve(postorderIndex,inorder,postorder,position+1,end,n,m);
+        root.left=solve(postorderIndex,inorder,postorder,start,position-1,n,m);
+        return root;
+    }   
+    // Function to return a tree created from postorder and inoreder traversals.
+    Node buildTree(int n, int in[], int post[]) {
+         HashMap<Integer,Integer> m=new HashMap<Integer,Integer>();
+        int[] postOrderIndex=new int[1];
+        postOrderIndex[0]=n-1;
+        nodeToIndex(in,m,n);
+        Node root=solve(postOrderIndex,in,post,0,n-1,n,m);
+        return root;
+    }
+}
