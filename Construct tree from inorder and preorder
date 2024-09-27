@@ -1,0 +1,28 @@
+class Solution
+{
+    public static void nodeToIndex(int[] inorder,HashMap<Integer,Integer> m,int n){
+        for(int i=0; i<n; i++){
+            m.put(inorder[i],i);
+        }
+    }
+    public static Node solve(int[] preorderIndex,int[] inorder,int[] preorder,int start,int end,int n,HashMap<Integer,Integer> m){
+        if(preorderIndex[0]>n || start>end)
+            return null;
+        int element=preorder[preorderIndex[0]++];
+        Node root=new Node(element);
+        int position=m.get(element);
+        root.left=solve(preorderIndex,inorder,preorder,start,position-1,n,m);
+        root.right=solve(preorderIndex,inorder,preorder,position+1,end,n,m);
+        return root;
+    }   
+    public static Node buildTree(int inorder[], int preorder[], int n)
+    {
+        HashMap<Integer,Integer> m=new HashMap<Integer,Integer>();
+        int[] preOrderIndex=new int[1];
+        inorderIndexes[1]=n-1;
+        nodeToIndex(inorder,m,n);
+        Node root=solve(preOrderIndex,inorder,preorder,0,n-1,n,m);
+        return root;
+        
+    }
+}
