@@ -1,0 +1,20 @@
+class Solution {
+    public static int getHeight(TreeNode root){
+        if(root==null)
+            return 0;
+        int leftHeight=getHeight(root.left);
+        int rightHeight=getHeight(root.right);
+        int totalHeight=Math.max(leftHeight,rightHeight)+1;
+        return totalHeight;
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root==null)
+            return 0;
+        int option1=diameterOfBinaryTree(root.left);
+        int option2=diameterOfBinaryTree(root.right);
+        int option3=getHeight(root.left)+getHeight(root.right);
+        int totalDiameter=Math.max(option1,Math.max(option2,option3));
+        return totalDiameter;
+        
+    }
+}
