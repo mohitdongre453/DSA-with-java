@@ -1,0 +1,25 @@
+class Solution {
+    public static int getHeight(TreeNode root){
+        if(root==null)
+            return 0;
+        int leftHeight=getHeight(root.left);
+        int rightHeight=getHeight(root.right);
+        int totalHeight=Math.max(leftHeight,rightHeight);
+        return 1+totalHeight;
+    }
+    public boolean isBalanced(TreeNode root) {
+        if(root==null)
+            return true;
+        int leftAns=getHeight(root.left);
+        int rightAns=getHeight(root.right);
+        int absDiff=Math.abs(leftAns-rightAns);
+        boolean status=(absDiff<=1);
+        boolean leftStatus=isBalanced(root.left);
+        boolean rightStatus=isBalanced(root.right);
+        if(status && leftStatus && rightStatus){
+            return true;
+        }
+        return false;
+        
+    }
+}
