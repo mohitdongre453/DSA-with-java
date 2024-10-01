@@ -1,0 +1,43 @@
+class pair{
+    Node node;
+    int distance;
+    pair(Node node,int val){
+        this.node=node;
+        this.distance=val;
+    }
+}
+class Solution {
+    // Function to return a list of nodes visible from the top view
+    // from left to right in Binary Tree.
+    static ArrayList<Integer> topView(Node root) {
+        ArrayList<Integer> l=new ArrayList<Integer>();
+        if(root==null)
+            return l;  
+        int minDist=Integer.MAX_VALUE;
+        int maxDist=Integer.MIN_VALUE;
+        Queue<pair> q=new LinkedList<pair>();
+        HashMap<Integer,Node> m=new HashMap<Integer,Node>();
+        q.add(new pair(root,0));
+        
+        while(!q.isEmpty()){
+            pair p=q.remove();
+            Node frontNode=p.node;
+            int hd=p.distance;
+            minDist=Math.min(minDist,hd);
+            maxDist=Math.max(maxDist,hd);
+            if(!m.containsKey(hd)){
+                m.put(hd,frontNode);
+            }
+            if(frontNode.left!=null)
+                q.add(new pair(frontNode.left,hd-1));
+            if(frontNode.right!=null)
+                 q.add(new pair(frontNode.right,hd+1));
+                 
+        }
+        for(int i=minDist; i<=maxDist; i++){
+            Node temp=m.get(i);
+            l.add(temp.data);
+        }
+        return l;
+    }
+}
