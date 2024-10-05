@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+        Queue<TreeNode> q=new LinkedList<TreeNode>();
+        q.add(root);
+        boolean nullFound=false;
+        while(!q.isEmpty()){
+            TreeNode frontNode=q.remove();
+            if(frontNode==null){
+                nullFound=true;
+            }
+            else{
+                if(nullFound==true)
+                    return false;
+                else{
+                    q.add(frontNode.left);
+                    q.add(frontNode.right);
+                }
+            }
+            
+        }
+        return true;
+        
+    }
+}
