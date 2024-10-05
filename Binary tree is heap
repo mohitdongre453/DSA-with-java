@@ -1,0 +1,50 @@
+class Solution {
+    public static boolean isComplete(Node root){
+        Queue<Node> q=new LinkedList<Node>();
+        q.add(root);
+        boolean nullFound=false;
+        while(!q.isEmpty()){
+            Node frontNode=q.remove();
+            if(frontNode==null)
+                 nullFound=true;
+            else{
+                if(nullFound==true)
+                    return false;
+                else{
+                    q.add(frontNode.left);
+                    q.add(frontNode.right);
+                }    
+            }     
+        }
+        return true;
+    }
+    public static boolean MaxHeap(Node root){
+        if(root==null)
+            return true;
+        if(root.left==null && root.right==null)
+             return true;
+        boolean leftAns=MaxHeap(root.left);
+        boolean rightAns=MaxHeap(root.right);
+        boolean option1=true;
+        if(root.left!=null && root.data<root.left.data)
+            option1=false;
+        boolean option2=true;    
+        if(root.right!=null && root.data<root.right.data)
+            option2=false;
+        boolean currAns=option1 && option2;
+        if(currAns && leftAns && rightAns)
+            return true;
+        else
+              return false;
+        
+    }
+    boolean isHeap(Node tree) {
+        boolean complete=isComplete(tree);
+        boolean maxHeap=MaxHeap(tree);
+        if(complete && maxHeap)
+            return true;
+        else
+            return false;
+            
+    }
+}
