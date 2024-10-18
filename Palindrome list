@@ -1,0 +1,50 @@
+class Solution {
+    public ListNode getMiddle(ListNode head,ListNode[] prevOfmid){
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null){
+            fast=fast.next;
+            if(fast!=null){
+                fast=fast.next;
+            }
+            prevOfmid[0]=slow;
+            slow=slow.next;
+        }
+        return slow;
+    }
+    public ListNode reverseList(ListNode prev,ListNode curr){
+        if(curr==null){
+            return prev;
+        }
+        ListNode forward=curr.next;
+        curr.next=prev;
+        prev=curr;
+        curr=forward;
+        return reverseList(prev,curr);
+    }
+    public boolean isPalindrome(ListNode head) {
+        if(head==null || head.next==null)
+            return true;
+      ListNode firstHalf=head;
+      ListNode[] prevOfmid=new ListNode[1];
+      ListNode mid=getMiddle(head,prevOfmid);
+      prevOfmid[0].next=null;
+      ListNode prev=null;
+      ListNode curr=mid;
+      ListNode secondHalf=reverseList(prev,curr);
+      ListNode temp=firstHalf;
+      while(secondHalf!=null){
+          if(firstHalf.val!=secondHalf.val)
+              return false;
+          else{
+              firstHalf=firstHalf.next;
+              secondHalf=secondHalf.next;
+          }
+          
+      }
+      return true;
+        
+        
+        
+    }
+}
