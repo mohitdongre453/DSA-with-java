@@ -1,0 +1,57 @@
+class Solution {
+    public static void insertAtTail(Node toMove,Node[] head,Node[] tail){
+        if(head[0]==null){
+            head[0]=toMove;
+            tail[0]=toMove;
+        }
+        else{
+           tail[0].next=toMove;
+           tail[0]=toMove;
+        }
+        return;
+    }
+    static Node segregate(Node head) {
+        Node[] zeroHead=new Node[1];
+        Node[] zeroTail=new Node[1];
+        Node[] oneHead=new Node[1];
+        Node[] oneTail=new Node[1];
+        Node[] twoHead=new Node[1];
+        Node[] twoTail=new Node[1];
+        Node toMove=null;
+        Node temp=head;
+        while(temp!=null){
+           Node nextNode = temp.next; // Store the next node
+            temp.next = null; // Break the link to avoid cycles
+            if(temp.data==0){
+                insertAtTail(temp,zeroHead,zeroTail);
+            }
+            else if(temp.data==1){
+                insertAtTail(temp,oneHead,oneTail);
+            }
+            else if(temp.data==2){
+                insertAtTail(temp,twoHead,twoTail);
+            }
+            temp=nextNode;
+        }
+        if(zeroHead[0]!=null){
+            if(oneHead[0]!=null){
+                zeroTail[0].next=oneHead[0];
+                oneTail[0].next=twoHead[0];
+            }
+            else{
+                zeroTail[0].next=twoHead[0];
+            }
+            return zeroHead[0];
+        }
+        else{
+            if(oneHead[0]!=null){
+                oneTail[0].next=twoHead[0];
+            }
+            else{
+                return twoHead[0];
+            }
+            return oneHead[0];
+        }
+        
+    }
+}
